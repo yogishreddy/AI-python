@@ -1,0 +1,15 @@
+Understanding Maths concepts is also useful to develop A.I based programs so lets start with basic level mathematical question
+To find transpose of a given rxc matrix
+
+r = int(input())
+c=int(input())
+lis=[]
+for i in range(r):
+    l=list(map(int,input().strip().split()[:c]))
+    lis.append(l)
+
+print("Transpose of the given matrix is:")
+for j in range(c):
+    for k in range(r):
+        print(lis[k][j],end=" ")
+    print()
