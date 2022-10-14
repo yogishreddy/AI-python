@@ -1,0 +1,21 @@
+Program:-
+import random
+def takeaguess(chance):
+    r=random.randint(1,10)
+    for i in range(chance):
+        n = int(input("Enter a number between 1 and 10:"))
+        if r == n:
+            print("You guessed it right")
+            break
+        elif r>n:
+            print("You guessed a little lower")
+        elif r<n:
+            print("You guesseed a little higher")
+    q = input("Do you want to try again(y/n)")
+    if q=='y':
+        takeaguess(chance)
+chance=int(input("enter number of chances: "))
+takeaguess(chance)
+
+"""Description:
+ A python program to play the game guess a number"""
