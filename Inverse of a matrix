@@ -1,0 +1,68 @@
+def minor(m,i,j):
+    return [row[:j] + row[j+1:] for row in (m[:i]+m[i+1:])]
+
+def det(m):
+    if len(m) == 2:
+        return m[0][0]*m[1][1]-m[0][1]*m[1][0]
+    determinant = 0
+    for c in range(len(m)):
+        determinant += ((-1)**c)*m[0][c]*det(minor(m,0,c))
+    return determinant
+def transpose(r,c,l):
+    temp=[]
+    for i in range(c):
+        lis=[]
+        for j in range(r):
+            lis.append(0)
+        temp.append(lis)
+    for i in range(c):
+        for j in range(r):
+            temp[i][j]=l[j][i]
+    print("Transpose is : ",temp)
+    return temp
+def adj(r,c,lis):
+    temp=[]
+    for i in range(r):
+        l=[]
+        for j in range(c):
+            l.append(0)  
+        temp.append(l)
+    for i in range(r):
+        for j in range(c):
+            temp[i][j]= (lis[i][j]*lis[i+1][j+1])-(lis[i][j+1]*lis[i+1][j])
+    print("Adjacency is : ",temp)
+    return temp
+def inverse(r,c,l,determinant):
+    if r==2:
+        taj=[]
+        taj.append([l[1][1],-l[0][1]])
+        taj.append([-l[1][0],l[0][0]])
+    else:
+        lis=[]
+        for i in range(r):
+            l[i].append(l[i][0])
+            lis.append(l[i])
+        lis.append(l[0])
+        aj = adj(r,c,lis)
+        taj= transpose(r,c,aj)
+    print("Inverse of the given matrix:")
+    for i in range(c):
+        for j in range(r):
+            print("{:.1f}".format(taj[i][j]/determinant),end="\t")
+        print()
+r=int(input("Enter number of rows in matrix: "))
+c=int(input("Enter number of columns in matrix: "))
+l=[]
+print("Enter the matrix: ")
+for i in range(r):
+    t=list(map(int,input().strip().split()[:c]))
+    l.append(t)
+if r==c:
+    determinant=det(l)
+    if determinant==0:
+        print("Inverse doesn't exist")
+    else:
+        inverse(r,c,l,determinant)
+else:
+    print("Inverse exists only for a square matrix(r=c)")
+
